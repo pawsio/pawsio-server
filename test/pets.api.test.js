@@ -29,6 +29,10 @@ describe('tests users endpoint on server', () => {
         owner: ''
     };
 
+    const update = {
+        animal: 'motorrad'
+    };
+
     let userToken = '';
 
     before(done => {
@@ -38,7 +42,6 @@ describe('tests users endpoint on server', () => {
             .then(res => {
                 assert.equal(res.body.username, testUser.username);
                 userToken = res.body.token;
-                newPet.usernameId = res.body._id;
                 newPet.owner = res.body.username;
                 done();
             })
@@ -51,7 +54,70 @@ describe('tests users endpoint on server', () => {
             .set('authorization', `Bearer ${userToken}`)
             .send(newPet)
             .then(res => {
-                console.log(res.body);
+                assert.isOk(res.body._id);
+                newPet.__v = 0;
+                newPet.usernameId = res.body.usernameId;
+                newPet._id = res.body._id;
+                assert.deepEqual(res.body, newPet)
+                done();
+            })
+            .catch(done);
+    });
+
+    it('gets a single pet based on id', done => {
+        request
+            .get(`/api/pets/${newPet._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.deepEqual(res.body, newPet);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('gets a user and all pets related to that user', done => {
+        request
+            .get(`/api/pets`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.equal(res.body.username, testUser.username);
+                assert.equal(res.body.pets.length, 1);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('puts new updated info on new pet', done => {
+        request
+            .put(`/api/pets/${newPet._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .send(update)
+            .then(res => {
+                assert.isOk(res.body);
+                newPet.animal = update.animal;
+                assert.deepEqual(res.body, newPet);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('deletes pet from database', done => {
+        request
+            .del(`/api/pets/${newPet._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.deepEqual(res.body, newPet);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('makes sure that pet was removed', done => {
+        request
+            .get(`/api/pets/${newPet._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.deepEqual(res.body, {});
                 done();
             })
             .catch(done);
