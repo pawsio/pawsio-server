@@ -6,7 +6,7 @@ const connection = require('./test-setup-mongoose');
 
 chai.use(chaiHttp);
 
-describe('tests pets endpoint on server', () => {
+describe('tests pet snapshots endpoint on server', () => {
     
     before(done => {
         const drop = () => connection.db.dropDatabase(done);
@@ -29,9 +29,22 @@ describe('tests pets endpoint on server', () => {
         data: []
     };
 
-    const update = {
-        animal: 'motorrad'
+    const updateOne = {
+        name: newPet.name,
+        temperature: 98
     };
+
+    const updateTwo = {
+        name: newPet.name,
+        temperature: 99
+    };
+
+    const updateThree = {
+        name: newPet.name,
+        temperature: 100
+    };
+
+    const allUpdates = [updateOne, updateTwo, updateThree];
 
     let userToken = '';
 
@@ -48,7 +61,7 @@ describe('tests pets endpoint on server', () => {
             .catch(done);
     });
 
-    it('posts a new pet', done => {
+    before(done => {
         request
             .post('/api/pets')
             .set('authorization', `Bearer ${userToken}`)
@@ -64,72 +77,64 @@ describe('tests pets endpoint on server', () => {
             .catch(done);
     });
 
-    it('gets a single pet based on id', done => {
+    function postData(data, petId, token, done) {
         request
-            .get(`/api/pets/${newPet._id}`)
-            .set('authorization', `Bearer ${userToken}`)
-            .then(res => {
-                assert.deepEqual(res.body, newPet);
-                done();
-            })
-            .catch(done);
-    });
-
-    it('gets a user and all pets related to that user', done => {
-        request
-            .get('/api/pets/all')
-            .set('authorization', `Bearer ${userToken}`)
-            .then(res => {
-                assert.equal(res.body.username, testUser.username);
-                assert.equal(res.body.pets.length, 1);
-                done();
-            })
-            .catch(done);
-    });
-
-    it('gets a pet based on a query string', done => {
-        request
-            .get(`/api/pets?owner=${testUser.username}&name=${newPet.name}`)
-            .set('authorization', `Bearer ${userToken}`)
-            .then(res => {
-                assert.equal(res.body.length, 1);
-                assert.deepEqual(res.body[0], newPet);
-                done();
-            })
-            .catch(done);
-    });
-
-    it('puts new updated info on new pet', done => {
-        request
-            .put(`/api/pets/${newPet._id}`)
-            .set('authorization', `Bearer ${userToken}`)
-            .send(update)
+            .post(`/api/pet-snapshots/${petId}`)
+            .set('authorization', `Bearer ${token}`)
+            .send(data)
             .then(res => {
                 assert.isOk(res.body);
-                newPet.animal = update.animal;
-                assert.deepEqual(res.body, newPet);
+                assert.equal(res.body.name, data.name);
+                assert.equal(res.body.temperature, data.temperature);
+                done();
+            })
+            .catch(done);
+    };
+
+    it('posts first data', done => {
+        postData(updateOne, newPet._id, userToken, done);
+    });
+
+    it('posts second data', done => {
+        postData(updateTwo, newPet._id, userToken, done);
+    });
+
+    it('posts third data', done => {
+        postData(updateThree, newPet._id, userToken, done);
+    });
+
+    it('gets pet along with time data', done => {
+        request
+            .get(`/api/pet-snapshots/${newPet._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                let data = res.body.data;
+                assert.equal(data.length, allUpdates.length);
+                assert.isAbove(data[0].date, data[data.length - 1].date);
                 done();
             })
             .catch(done);
     });
 
-    it('deletes pet from database', done => {
+    it('deletes all data related to this pet', done => {
         request
-            .del(`/api/pets/${newPet._id}`)
+            .del(`/api/pet-snapshots/${newPet._id}`)
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
-                assert.deepEqual(res.body, newPet);
+                assert.isOk(res.body.ok);
+                assert.equal(res.body.n, allUpdates.length);
                 done();
             })
             .catch(done);
     });
 
-    it('makes sure that pet was removed', done => {
+    it('makes sure all data related to the pet was removed', done => {
         request
-            .get(`/api/pets/${newPet._id}`)
+            .get(`/api/pet-snapshots/${newPet._id}`)
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
-                assert.deepEqual(res.body, {});
+                let data = res.body.data;
+                assert.equal(data.length, 0);
                 done();
             })
             .catch(done);

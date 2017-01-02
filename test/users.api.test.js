@@ -21,7 +21,7 @@ describe('tests users endpoint on server', () => {
             password: 'DaBoss',
             roles: ['admin']
         };
-        const newAdmin = new userModel(daAdmin)
+        const newAdmin = new userModel(daAdmin);
         newAdmin.generateHash(daAdmin.password);
         newAdmin.save(done);
     });
@@ -92,13 +92,13 @@ describe('tests users endpoint on server', () => {
         badRequest('/api/users/signup', goodUser, `Username ${goodUser.username} already exists`, done);
     });
 
-    it('returns same token when user signs back up with the server', done => {
+    it('returns a token when user signs back up with the server', done => {
         request
             .post('/api/users/signin')
             .send(goodUser)
             .then(res => {
                 assert.isOk(res.body.token);
-                assert.equal(userToken, res.body.token);
+                userToken = res.body.token;
                 done();
             })
             .catch(done);
