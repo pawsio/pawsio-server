@@ -3,7 +3,6 @@ const chai = require('chai');
 const assert = chai.assert;
 const chaiHttp = require('chai-http');
 const connection = require('./test-setup-mongoose');
-const petModel = require('../lib/models/pet');
 
 chai.use(chaiHttp);
 
@@ -26,7 +25,8 @@ describe('tests users endpoint on server', () => {
         name: 'hermes',
         animal: 'motorcycle',
         usernameId: '',
-        owner: ''
+        owner: '',
+        data: []
     };
 
     const update = {
@@ -50,7 +50,7 @@ describe('tests users endpoint on server', () => {
 
     it('posts a new pet', done => {
         request
-            .post('/api/pets/')
+            .post('/api/pets')
             .set('authorization', `Bearer ${userToken}`)
             .send(newPet)
             .then(res => {
@@ -58,7 +58,7 @@ describe('tests users endpoint on server', () => {
                 newPet.__v = 0;
                 newPet.usernameId = res.body.usernameId;
                 newPet._id = res.body._id;
-                assert.deepEqual(res.body, newPet)
+                assert.deepEqual(res.body, newPet);
                 done();
             })
             .catch(done);
@@ -77,11 +77,23 @@ describe('tests users endpoint on server', () => {
 
     it('gets a user and all pets related to that user', done => {
         request
-            .get(`/api/pets`)
+            .get('/api/pets/all')
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
                 assert.equal(res.body.username, testUser.username);
                 assert.equal(res.body.pets.length, 1);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('gets a pet based on a query string', done => {
+        request
+            .get(`/api/pets?owner=${testUser.username}&name=${newPet.name}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.equal(res.body.length, 1);
+                assert.deepEqual(res.body[0], newPet);
                 done();
             })
             .catch(done);
