@@ -110,7 +110,7 @@ describe('tests pet snapshots endpoint on server', () => {
             .then(res => {
                 let data = res.body.data;
                 assert.equal(data.length, allUpdates.length);
-                assert.isAbove(data[0].date, data[data.length - 1].date);
+                assert.isAbove(data[data.length - 1].date, data[0].date);
                 done();
             })
             .catch(done);
