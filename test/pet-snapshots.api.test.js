@@ -29,22 +29,25 @@ describe('tests pet snapshots endpoint on server', () => {
         data: []
     };
 
-    const updateOne = {
+    const snapShotOne = {
         name: newPet.name,
-        temperature: 98
+        animalId: '',
+        dataPayload: [1,2,3]
     };
 
-    const updateTwo = {
+    const snapShotTwo = {
         name: newPet.name,
-        temperature: 99
+        animalId: '',
+        dataPayload: [4,5,6]
     };
 
-    const updateThree = {
+    const snapShotThree = {
         name: newPet.name,
-        temperature: 100
+        animalId: '',
+        dataPayload: [7,8,9]
     };
 
-    const allUpdates = [updateOne, updateTwo, updateThree];
+    let allUpdates = [snapShotOne, snapShotTwo, snapShotThree];
 
     let userToken = '';
 
@@ -85,56 +88,70 @@ describe('tests pet snapshots endpoint on server', () => {
             .then(res => {
                 assert.isOk(res.body);
                 assert.equal(res.body.name, data.name);
-                assert.equal(res.body.temperature, data.temperature);
+                assert.deepEqual(res.body.dataPayload, data.dataPayload);
                 done();
             })
             .catch(done);
     };
 
     it('posts first data', done => {
-        postData(updateOne, newPet._id, userToken, done);
+        postData(snapShotOne, newPet._id, userToken, done);
     });
 
     it('posts second data', done => {
-        postData(updateTwo, newPet._id, userToken, done);
+        postData(snapShotTwo, newPet._id, userToken, done);
     });
 
     it('posts third data', done => {
-        postData(updateThree, newPet._id, userToken, done);
+        postData(snapShotThree, newPet._id, userToken, done);
     });
 
-    it('gets pet along with time data', done => {
+    it('gets pet and list of snapshots taken that are sorted by date', done => {
         request
-            .get(`/api/pet-snapshots/${newPet._id}`)
+            .get(`/api/pet-snapshots/${newPet._id}/all`)
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
                 let data = res.body.data;
                 assert.equal(data.length, allUpdates.length);
                 assert.isAbove(data[data.length - 1].date, data[0].date);
+                snapShotOne._id = data[0]._id;
+                snapShotOne.animalId = data[0].animalId;
+                snapShotOne.date = data[0].date;
+                snapShotOne.__v = 0;
                 done();
             })
             .catch(done);
     });
 
-    it('deletes all data related to this pet', done => {
+    it('gets a specific snapshot as identified by id', done => {
         request
-            .del(`/api/pet-snapshots/${newPet._id}`)
+            .get(`/api/pet-snapshots/${snapShotOne._id}`)
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
-                assert.isOk(res.body.ok);
-                assert.equal(res.body.n, allUpdates.length);
+                assert.deepEqual(res.body, snapShotOne);
                 done();
             })
             .catch(done);
     });
 
-    it('makes sure all data related to the pet was removed', done => {
+    it('deletes a specific snapshot from the database', done => {
         request
-            .get(`/api/pet-snapshots/${newPet._id}`)
+            .del(`/api/pet-snapshots/${snapShotOne._id}`)
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
-                let data = res.body.data;
-                assert.equal(data.length, 0);
+                assert.isOk(res.body);
+                assert.deepEqual(res.body, snapShotOne);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('makes sure snapshot was indeed removed', done => {
+        request
+            .get(`/api/pet-snapshots/${newPet._id}/all`)
+            .set('authorization', `Bearer ${userToken}`)
+            .then(res => {
+                assert.equal(res.body.data.length, allUpdates.length - 1);
                 done();
             })
             .catch(done);
