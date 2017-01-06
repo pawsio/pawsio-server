@@ -49,6 +49,10 @@ describe('tests pet snapshots endpoint on server', () => {
 
     let allUpdates = [snapShotOne, snapShotTwo, snapShotThree];
 
+    let hikeName = {
+        snapshotName: 'whatever'
+    };
+
     let userToken = '';
 
     before(done => {
@@ -129,6 +133,19 @@ describe('tests pet snapshots endpoint on server', () => {
             .set('authorization', `Bearer ${userToken}`)
             .then(res => {
                 assert.deepEqual(res.body, snapShotOne);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('puts a new update to a given snapshot based on id', done => {
+        request
+            .put(`/api/pet-snapshots/${snapShotOne._id}`)
+            .set('authorization', `Bearer ${userToken}`)
+            .send(hikeName)
+            .then(res => {
+                assert.equal(res.body.snapshotName, hikeName.snapshotName);
+                snapShotOne.snapshotName = hikeName.snapshotName;
                 done();
             })
             .catch(done);
