@@ -39,7 +39,7 @@ There are three main API endpoints that perform our CRUD operations as shown in 
 * url/api/pets
     * endpoint for getting all pets related to a user, a specific pet by id or query string, adding pets, updating pets and removing them
 * url/api/pet-snapshots
-    * endpoint used for posting collected data from the IOT application, retrieving said data, and deleting it as necessary
+    * endpoint used for posting collected data from the IOT application, retrieving said data, giving it a name and deleting it as necessary
 
 ### Testing
 
