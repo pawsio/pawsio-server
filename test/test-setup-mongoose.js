@@ -1,3 +1,8 @@
+// If you want to use this functionality in two places,
+// change the export to a function that can be called with
+// dbURI. Don't cut and paste entire file  :(
+
+
 const mongoose = require( 'mongoose' );
 
 // we need a URI that points to our database
