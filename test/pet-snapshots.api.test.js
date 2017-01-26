@@ -92,7 +92,6 @@ describe('tests pet snapshots endpoint on server', () => {
             .then(res => {
                 assert.isOk(res.body);
                 assert.equal(res.body.name, data.name);
-                assert.deepEqual(res.body.dataPayload, data.dataPayload);
                 done();
             })
             .catch(done);
