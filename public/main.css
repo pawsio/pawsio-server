@@ -394,6 +394,252 @@ hr {
     ._3z0ZR-ff-NLQoPBo8gGSQf footer footer:hover {
       cursor: pointer;
       color: #618F33; }
+._1AHxIcRtMaRu2-TbxI-h0w {
+  margin: 0; }
+  ._1AHxIcRtMaRu2-TbxI-h0w header {
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(24, 25, 25, 0.8); }
+    ._1AHxIcRtMaRu2-TbxI-h0w header div {
+      width: 100%;
+      padding: 0;
+      float: left; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header div h1 {
+        margin: 2% 2% 1% 4%;
+        display: inline-block;
+        font-family: "Raleway", sans-serif;
+        color: #F0FFFF;
+        font-size: 2.3em; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header div h2 {
+        display: inline-block;
+        font-family: "Waiting for the Sunrise", cursive;
+        font-size: 1.4em;
+        color: #618F33; }
+    ._1AHxIcRtMaRu2-TbxI-h0w header nav ul {
+      box-sizing: border-box;
+      text-align: left;
+      font-family: "Raleway", sans-serif;
+      font-size: 1em;
+      width: 100%;
+      float: right;
+      position: absolute;
+      list-style: none;
+      margin: 0; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li {
+        float: right;
+        margin: 4% 4% 0 0;
+        position: relative;
+        display: block;
+        color: #F0FFFF; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li:hover {
+        color: #618F33; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li ul {
+        background: #618F33;
+        list-style: none;
+        padding: 0;
+        position: absolute;
+        display: none; }
+        ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li ul li {
+          padding: 2px 6px;
+          float: none;
+          white-space: nowrap;
+          color: #181919;
+          font-family: "Waiting for the Sunrise", cursive;
+          font-size: 1em; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li:hover ul {
+        display: block; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li:hover li {
+        background: #618F33; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li:hover ul li {
+        text-decoration: none; }
+      ._1AHxIcRtMaRu2-TbxI-h0w header nav ul li:hover ul li:hover {
+        background: rgba(189, 161, 70, 0); }
+  ._1AHxIcRtMaRu2-TbxI-h0w .pet-info {
+    margin: 12% 2%;
+    text-align: center; }
+    ._1AHxIcRtMaRu2-TbxI-h0w .pet-info h2 {
+      width: 75%;
+      margin: 0 auto;
+      border-bottom: 1px solid #181919; }
+  ._1AHxIcRtMaRu2-TbxI-h0w .overview {
+    margin: 2% 0;
+    width: 100%;
+    text-align: center; }
+    ._1AHxIcRtMaRu2-TbxI-h0w .overview p {
+      display: inline-block;
+      width: 30%; }
+    ._1AHxIcRtMaRu2-TbxI-h0w .overview span {
+      color: #618F33;
+      margin-right: 2%; }
+  ._1AHxIcRtMaRu2-TbxI-h0w .hike-length-chart,
+  ._1AHxIcRtMaRu2-TbxI-h0w .hike-distance-chart,
+  ._1AHxIcRtMaRu2-TbxI-h0w .sound-chart {
+    display: inline-block;
+    background-color: #C0CCCC;
+    border-radius: 15px;
+    margin: 1%;
+    width: 25%;
+    padding: 1% 2%; }
+    ._1AHxIcRtMaRu2-TbxI-h0w .hike-length-chart p,
+    ._1AHxIcRtMaRu2-TbxI-h0w .hike-distance-chart p,
+    ._1AHxIcRtMaRu2-TbxI-h0w .sound-chart p {
+      color: #181919;
+      margin: 5% 0; }
+._2fEY5ueGO7Ovc-myA_-RLz {
+  margin: 0; }
+  ._2fEY5ueGO7Ovc-myA_-RLz header {
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(24, 25, 25, 0.8); }
+    ._2fEY5ueGO7Ovc-myA_-RLz header div {
+      width: 100%;
+      padding: 0;
+      float: left; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header div h1 {
+        margin: 2% 2% 1% 4%;
+        display: inline-block;
+        font-family: "Raleway", sans-serif;
+        color: #F0FFFF;
+        font-size: 2.3em; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header div h2 {
+        display: inline-block;
+        font-family: "Waiting for the Sunrise", cursive;
+        font-size: 1.4em;
+        color: #618F33; }
+    ._2fEY5ueGO7Ovc-myA_-RLz header nav ul {
+      box-sizing: border-box;
+      text-align: left;
+      font-family: "Raleway", sans-serif;
+      font-size: 1em;
+      width: 100%;
+      float: right;
+      position: absolute;
+      list-style: none;
+      margin: 0; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li {
+        float: right;
+        margin: 4% 4% 0 0;
+        position: relative;
+        display: block;
+        color: #F0FFFF; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li:hover {
+        color: #618F33; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li ul {
+        background: rgba(189, 161, 70, 0);
+        list-style: none;
+        padding: 0;
+        position: absolute;
+        display: none; }
+        ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li ul li {
+          padding: 6px;
+          float: none;
+          white-space: nowrap;
+          color: #181919;
+          font-family: "Waiting for the Sunrise", cursive;
+          font-size: 1.5em;
+          text-align: center; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li:hover ul {
+        display: block; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li:hover li {
+        background: #F0FFFF; }
+      ._2fEY5ueGO7Ovc-myA_-RLz header nav ul li:hover ul li {
+        text-decoration: none;
+        background: #F0FFFF; }
+  ._2fEY5ueGO7Ovc-myA_-RLz footer {
+    text-align: center;
+    font-family: "News Cycle", sans-serif;
+    color: #181919;
+    padding: 5px 45px;
+    position: relative; }
+    ._2fEY5ueGO7Ovc-myA_-RLz footer footer:hover {
+      cursor: pointer;
+      color: #618F33; }
+
+._2WdhFNXLfDTqO7_ra90rTB {
+  margin: 10% 2% 0 2%; }
+  ._2WdhFNXLfDTqO7_ra90rTB .name-link {
+    text-decoration: none; }
+  ._2WdhFNXLfDTqO7_ra90rTB .name-link:visited {
+    color: #618F33; }
+  ._2WdhFNXLfDTqO7_ra90rTB table {
+    width: 50%;
+    margin: 2% auto 0;
+    border-collapse: collapse; }
+  ._2WdhFNXLfDTqO7_ra90rTB thead {
+    font-weight: bold; }
+  ._2WdhFNXLfDTqO7_ra90rTB tbody {
+    cursor: pointer; }
+  ._2WdhFNXLfDTqO7_ra90rTB .hikes {
+    width: 57%;
+    margin: 2%;
+    float: right; }
+  ._2WdhFNXLfDTqO7_ra90rTB ul {
+    list-style: none;
+    padding: 0; }
+
+hr {
+  border: 1px solid #181919; }
+
+.dates {
+  font-family: "Raleway", sans-serif;
+  border-radius: 25px;
+  padding: 20px;
+  width: 600px;
+  height: 35px; }
+
+.dates:hover .highlight {
+  background-color: #C0CCCC; }
+
+.delete-btn {
+  background-color: #c91c1c; }
+
+#pet-overview {
+  font-family: "Raleway", sans-serif;
+  display: inline-block;
+  width: 37%;
+  margin: 0 auto; }
+  #pet-overview #pet-header {
+    font-size: 20px;
+    color: #618F33; }
+
+.table-header {
+  color: #618F33;
+  border-bottom: 2px solid black;
+  font-size: 20px; }
+
+.overview-stats {
+  padding-bottom: 20px; }
+
+#delete-snap-td {
+  height: 10px;
+  width: 10px;
+  font-size: 12px;
+  color: red;
+  padding: 0px;
+  background-color: #F0FFFF; }
+
+.delete-snap-span:hover {
+  background-color: #C0CCCC; }
+
+.editable-controls {
+  position: relative;
+  top: -1px;
+  margin: 0;
+  padding: 0;
+  border: none; }
+
+.editable-buttons {
+  display: none; }
 ._1jJrEF2GDDrGjjq7thkHxr {
   margin: 0; }
   ._1jJrEF2GDDrGjjq7thkHxr header {
