@@ -37446,6 +37446,7 @@
 	
 	        remyService.getAll().then(function (remy) {
 	            _this.remy = remy;
+	            console.log(remy);
 	            var dataArr = _this.remy.data;
 	            for (var i = 0; i < dataArr.length; i++) {
 	                var longDate = dataArr[i].date;
